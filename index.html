@@ -117,7 +117,6 @@
           for (const pedido of pedidos) {
               // Separa os campos do pedido por tabulação
               const campos = pedido.split("\t");
-              console.log(campos)
 
               // Verifica se o campo "Detalhes do Pedido e Observações" existe e trata-o corretamente
               const detalhes = campos[10] ? campos[10].replace(/\n/g, ' ') : "";
