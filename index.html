@@ -111,6 +111,7 @@
         function gerarFormatado() {
           const input = document.getElementById("inputPedido").value.trim();
           const pedidos = input.split("Pedido:"); // Separa pedidos por quebras de linha
+          pedidos.shift(); // Remove o primeiro item do array, pois é vazio
           let outputHtml = "";
 
           for (const pedido of pedidos) {
