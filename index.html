@@ -134,12 +134,9 @@
                 const campos = pedido.split("\t");
 
                 // Verifica se o campo "Detalhes do Pedido e Observações" existe e trata-o corretamente
-                console.log(campos[10])
                 let detalhes = campos[10] ? campos[10].replace(/\n/g, '\n*') : "";
                 // Removendo aspas da string de detalhes
                 detalhes = detalhes.replace(/"/g, '');
-
-                console.log(detalhes)
                 // Monta o formato desejado com os campos
                 outputHtml += `\n\n\nCarimbo de data/hora: ${campos[2]}\nNome do cliente: ${campos[4]}\n<strong>Loja do Pedido: ${campos[6]}</strong>\nVendedor (a): ${campos[7]}\nData do pedido: ${campos[9]}\nDetalhes do Pedido e Observações:\n<strong>*${detalhes}</strong>\n<strong>Data de entrega: ${campos[14]}</strong>\n<strong>Loja de entrega: ${campos[15]}</strong>\n<strong>Observacoes de entrega: ${campos[16] ? campos[16].replace(/\n/g, ' ') : ""}</strong>\n\n\n\n`; // Adiciona um espaço extra para o próximo pedido
             }
