@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,13 +11,16 @@
             font-family: "Arial", sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #ffe3e3; /* Fundo vermelho amigável */
+            background-color: #ffe3e3;
+            /* Fundo vermelho amigável */
         }
 
         /* Estilos do navbar */
         .navbar {
-            background-color: #ea4f4f; /* Fundo vermelho amigável */
-            color: #fff; /* Texto na cor branca */
+            background-color: #ea4f4f;
+            /* Fundo vermelho amigável */
+            color: #fff;
+            /* Texto na cor branca */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -25,7 +29,8 @@
 
         /* Estilos do título */
         h1 {
-            font-family: "Arial Rounded MT Bold", sans-serif; /* Fonte amigável arredondada */
+            font-family: "Arial Rounded MT Bold", sans-serif;
+            /* Fonte amigável arredondada */
             font-size: 24px;
             margin: 0;
         }
@@ -35,26 +40,32 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding-top: 20px; /* Espaçamento entre navbar e conteúdo */
+            padding-top: 20px;
+            /* Espaçamento entre navbar e conteúdo */
         }
 
         /* Estilos do input e output */
         .input-output-container {
             width: 80%;
-            max-height: 400px; /* Altura máxima do bloco de output */
-            overflow-y: auto; /* Habilita a barra de rolagem vertical quando o conteúdo excede a altura máxima */
+            max-height: 400px;
+            /* Altura máxima do bloco de output */
+            overflow-y: auto;
+            /* Habilita a barra de rolagem vertical quando o conteúdo excede a altura máxima */
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
             background-color: #fff;
-            margin-top: 10px; 
-            margin-bottom: 100px;/* Espaçamento entre input e output */
+            margin-top: 10px;
+            margin-bottom: 100px;
+            /* Espaçamento entre input e output */
         }
 
         /* Estilos do footer */
         .footer {
-            background-color: #ea4f4f; /* Fundo vermelho amigável */
-            color: #fff; /* Texto na cor branca */
+            background-color: #ea4f4f;
+            /* Fundo vermelho amigável */
+            color: #fff;
+            /* Texto na cor branca */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -82,6 +93,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="navbar">
         <h1>Gerador de Pedidos Formatados</h1>
@@ -100,47 +112,54 @@
     <div class="footer">
         <div class="footer-text">
             <!-- Coloque o SVG do GitHub aqui, por exemplo: -->
-            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" alt="GitHub Icon" class="github-icon" viewBox="0 0 16 16">
-              <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15 .46.55 .38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" alt="GitHub Icon" class="github-icon"
+                viewBox="0 0 16 16">
+                <path
+                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15 .46.55 .38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
             </svg>
-            <a class="github-link" href="https://github.com/joaocanuto" target="_blank">Desenvolvido por João Guilherme</a>
+            <a class="github-link" href="https://github.com/joaocanuto" target="_blank">Desenvolvido por João
+                Guilherme</a>
         </div>
     </div>
 
     <script>
         function gerarFormatado() {
-          const input = document.getElementById("inputPedido").value.trim();
-          const pedidos = input.split("Pedido:"); // Separa pedidos por quebras de linha
-          pedidos.shift(); // Remove o primeiro item do array, pois é vazio
-          let outputHtml = "";
+            const input = document.getElementById("inputPedido").value.trim();
+            const pedidos = input.split("Pedido:"); // Separa pedidos por quebras de linha
+            pedidos.shift(); // Remove o primeiro item do array, pois é vazio
+            let outputHtml = "";
 
-          for (const pedido of pedidos) {
-              // Separa os campos do pedido por tabulação
-              const campos = pedido.split("\t");
+            for (const pedido of pedidos) {
+                // Separa os campos do pedido por tabulação
+                const campos = pedido.split("\t");
 
-              // Verifica se o campo "Detalhes do Pedido e Observações" existe e trata-o corretamente
-              const detalhes = campos[10] ? campos[10].replace(/\n/g, ' ') : "";
+                // Verifica se o campo "Detalhes do Pedido e Observações" existe e trata-o corretamente
+                console.log(campos[10])
+                let detalhes = campos[10] ? campos[10].replace(/\n/g, '\n*') : "";
+                // Removendo aspas da string de detalhes
+                detalhes = detalhes.replace(/"/g, '');
 
-              // Monta o formato desejado com os campos
-              outputHtml += `\n\n\nCarimbo de data/hora: ${campos[2]}\nEndereço de e-mail: ${campos[3]}\nNome do cliente: ${campos[4]}\nTelefone: ${campos[5]}\nLoja do Pedido: ${campos[6]}\nVendedor (a): ${campos[7]}\nData do pedido: ${campos[9]}\nDetalhes do Pedido e Observações: ${detalhes}\nData de entrega: ${campos[14]}\nLoja de entrega: ${campos[15]}\nObservacoes de entrega: ${campos[16] ? campos[16].replace(/\n/g, ' ') : ""}\n\n\n\n`; // Adiciona um espaço extra para o próximo pedido
-          }
-          document.getElementById("output").innerHTML = "<pre>" + outputHtml + "</pre>";
+                console.log(detalhes)
+                // Monta o formato desejado com os campos
+                outputHtml += `\n\n\nCarimbo de data/hora: ${campos[2]}\nEndereço de e-mail: ${campos[3]}\nNome do cliente: ${campos[4]}\nTelefone: ${campos[5]}\nLoja do Pedido: ${campos[6]}\nVendedor (a): ${campos[7]}\nData do pedido: ${campos[9]}\nDetalhes do Pedido e Observações:\n*${detalhes}\n\nData de entrega: ${campos[14]}\nLoja de entrega: ${campos[15]}\nObservacoes de entrega: ${campos[16] ? campos[16].replace(/\n/g, ' ') : ""}\n\n\n\n`; // Adiciona um espaço extra para o próximo pedido
+            }
+            document.getElementById("output").innerHTML = "<pre>" + outputHtml + "</pre>";
         }
     </script>
     <script>
         function imprimir() {
-          var prtContent = document.getElementById("output");
-          var WinPrint = window.open('', '', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0');
+            var prtContent = document.getElementById("output");
+            var WinPrint = window.open('', '', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0');
             WinPrint.document.write(prtContent.innerHTML);
             WinPrint.document.close();
             WinPrint.focus();
             WinPrint.print();
-            //WinPrint.close();
         }
-        function copyText() { 
+        function copyText() {
             navigator.clipboard.writeText
                 (document.getElementById("output").innerText);
         }
     </script>
 </body>
+
 </html>
