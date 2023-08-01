@@ -122,19 +122,7 @@
               const detalhes = campos[10] ? campos[10].replace(/\n/g, ' ') : "";
 
               // Monta o formato desejado com os campos
-              outputHtml += `
-                Carimbo de data/hora: ${campos[2]}
-                Endereço de e-mail: ${campos[3]}
-                Nome do cliente: ${campos[4]}
-                Telefone: ${campos[5]}
-                Loja do Pedido: ${campos[6]}
-                Vendedor (a): ${campos[7]}
-                Data do pedido: ${campos[9]}
-                Detalhes do Pedido e Observações: ${detalhes}
-                Data de entrega: ${campos[14]}
-                Loja de entrega: ${campos[15]}
-                Observações de entrega: ${campos[16] ? campos[16].replace(/\n/g, ' ') : ""}
-                `; // Adiciona um espaço extra para o próximo pedido
+              outputHtml += `\n\n\nCarimbo de data/hora: ${campos[2]}\nEndereço de e-mail: ${campos[3]}\nNome do cliente: ${campos[4]}\nTelefone: ${campos[5]}\nLoja do Pedido: ${campos[6]}\nVendedor (a): ${campos[7]}\nData do pedido: ${campos[9]}\nDetalhes do Pedido e Observações: ${detalhes}\nData de entrega: ${campos[14]}\nLoja de entrega: ${campos[15]}\nObservacoes de entrega: ${campos[16] ? campos[16].replace(/\n/g, ' ') : ""}\n\n\n\n`; // Adiciona um espaço extra para o próximo pedido
           }
           document.getElementById("output").innerHTML = "<pre>" + outputHtml + "</pre>";
         }
