@@ -165,10 +165,10 @@
                 // Body (detalhes do pedido):
                 // Pedidos:
                 // Section de pedidos:
-                let dividerEntrega = '<div style="position: relative;"><img style="position:absolute"src="motocicleta.png"><p style="padding-left: 25px;">Entrega</p></div>'
-                let dividerCliente = '<div style="position: relative;"><img style="position:absolute"src="do-utilizador.png"><p style="padding-left: 25px;">Dados do Cliente</p></div>'
-                let dividerPedido = '<div style="position: relative;"><img style="position:absolute"src="police-order.png"><p style="padding-left: 25px;">Detalhes do Pedido</p></div>'
-                let dividerLocalizacao = '<div style="position: relative;"><img style="position:absolute"src="mapas-e-bandeiras.png"><p style="padding-left: 25px;">Observacoes de entrega</p></div>'
+                let dividerEntrega = '<div style="position: relative;"><img style="position:absolute;width: 12px;top: 3px;"src="motocicleta.png"><p style="padding-left: 25px;">Entrega</p></div>'
+                let dividerCliente = '<div style="position: relative;"><img style="position:absolute;width: 12px;top: 3px;"src="do-utilizador.png"><p style="padding-left: 25px;">Dados do Cliente</p></div>'
+                let dividerPedido = '<div style="position: relative;"><img style="position:absolute;width: 12px;top: 3px;"src="police-order.png"><p style="padding-left: 25px;">Detalhes do Pedido</p></div>'
+                let dividerLocalizacao = '<div style="position: relative;margin-bottom:0px"><img style="position:absolute;width: 12px;top: 3px;"src="mapas-e-bandeiras.png"><p style="padding-left: 25px;margim-bottom:0px">Observacoes de entrega</p></div>'
                 let data_pedido = campos[9]
                 let detalhes_pedido = detalhes
                 let body_pedidos =  `<p>Data do pedido: ${data_pedido}</p>${dividerPedido} <strong>> ${detalhes}</strong>` 
@@ -182,7 +182,8 @@
                 let data_entrega = campos[14]
                 let loja_entrega = getLoja(campos[15])
                 let observacoes_entrega = campos[16] ? campos[16].replace(/\n/g, ' ') : ""
-                let entrega = `${dividerEntrega}<p>Data de entrega: ${data_entrega}</p>Loja de entrega: ${loja_entrega}${dividerLocalizacao} <p>${observacoes_entrega}</p>\n`
+                observacoes_entrega = getTextQuebrado(observacoes_entrega)
+                let entrega = `${dividerEntrega}<p>Data de entrega: ${data_entrega}</p>Loja de entrega:${loja_entrega}${dividerLocalizacao} <p style="margin-top:0;">${observacoes_entrega}</p>\n`
                 // Monta o formato desejado com os campos
 
                 //outputHtml += `\n\nCarimbo de data/hora: ${campos[2]}\nNome do cliente: ${campos[4]}\n<strong>Loja do Pedido: ${campos[6]}</strong>\nVendedor (a): ${campos[7]}\nData do pedido: ${campos[9]}\nDetalhes do Pedido e Observações:\n<strong>*${detalhes}</strong>\n<strong>Data de entrega: ${campos[14]}</strong>\n<strong>Loja de entrega: ${campos[15]}</strong>\n<strong>Observacoes de entrega: ${campos[16] ? campos[16].replace(/\n/g, ' ') : ""}</strong>\n\n`; // Adiciona um espaço extra para o próximo pedido
@@ -206,6 +207,18 @@
         }
     </script>
     <script>
+        function getTextQuebrado(text){
+            // in each 40 caracteres of the text i want to break the line
+            let parts = text.length / 40;
+            if (parts > 1){
+                let textQuebrado = ""
+                for (let i = 0; i < parts; i++){
+                    textQuebrado += text.substring(i*40, (i+1)*40) + "\n"
+                }
+                return textQuebrado
+            }
+            return text
+        }
         function imprimir() {
             var prtContent = document.getElementById("output");
             var WinPrint = window.open('', '', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0');
