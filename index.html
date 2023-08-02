@@ -156,8 +156,8 @@
                 let loja = parseInt(campos[6].substring(0,2))
                 console.log(loja)
                 let headers_pedido = {
-                    true: `<div style="color: black; width: 400px;"><strong><p style="text-align:center; font-size: x-large;">Pedido ${lojas_abrev[loja]} - 0${pedido_id}</p></strong></div>`,
-                    false: `<div style="color: black; width: 400px;"><strong><p style="text-align:center; font-size: x-large;">Pedido ${lojas_abrev[loja]} - ${pedido_id}</p></strong></div>`  
+                    true: `<div style="color: black; width: 230px;"><strong><p style="text-align:center; font-size: x-large;">Pedido ${lojas_abrev[loja]} - 0${pedido_id}</p></strong></div>`,
+                    false: `<div style="color: black; width: 230px;"><strong><p style="text-align:center; font-size: x-large;">Pedido ${lojas_abrev[loja]} - ${pedido_id}</p></strong></div>`  
                 }
                 let header_pedido = headers_pedido[pedido_id < 1001]
                 let header = `${header_pedido}<p>${carimbo_data_hora} - ${loja_pedido}</p><p>Vendedor (a): ${vendedor}</p>`
