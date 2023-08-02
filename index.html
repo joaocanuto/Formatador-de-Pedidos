@@ -8,7 +8,8 @@
     <style>
         /* Estilos globais */
         body {
-            font-family: "Arial", sans-serif;
+            font-family: "fangsong", sans-serif;
+            font-size: large;
             margin: 0;
             padding: 0;
             background-color: #ffe3e3;
@@ -101,6 +102,8 @@
 
     <div class="content-container">
         <textarea id="inputPedido" cols="80" rows="10" placeholder="Cole aqui os pedidos..."></textarea>
+        <!-- Diga o id do proximo pedido -->
+        <input type="number" id="idPedido" placeholder="ID do próximo pedido">
         <button onclick="gerarFormatado()">Gerar Formatado</button>
         <button onclick="imprimir()">Imprimir</button>
         <button onclick="copyText()">Copiar Pedidos</button>
@@ -128,19 +131,65 @@
             const pedidos = input.split("Pedido:"); // Separa pedidos por quebras de linha
             pedidos.shift(); // Remove o primeiro item do array, pois é vazio
             let outputHtml = "";
-
+            let pedido_id = parseInt(document.getElementById("idPedido").value);
             for (const pedido of pedidos) {
                 // Separa os campos do pedido por tabulação
                 const campos = pedido.split("\t");
 
                 // Verifica se o campo "Detalhes do Pedido e Observações" existe e trata-o corretamente
-                let detalhes = campos[10] ? campos[10].replace(/\n/g, '\n*') : "";
+                let detalhes = campos[10] ? campos[10].replace(/\n/g, '\n > ') : "";
                 // Removendo aspas da string de detalhes
+                
                 detalhes = detalhes.replace(/"/g, '');
+
+                // Header:
+                let loja_pedido = getLoja(campos[6])
+                let carimbo_data_hora = campos[2]
+                let vendedor = campos[7]
+                let header_pedido = `<div style="background-color:black; color: white; width: 320px;"><p style="text-align:center; font-size: x-large;">Pedido ${pedido_id}</p></div>`
+                let header = `${header_pedido}<p>${carimbo_data_hora} - ${loja_pedido}</p><p>Vendedor (a): ${vendedor}</p>`
+                
+                // Body (detalhes do pedido):
+                // Pedidos:
+                // Section de pedidos:
+                let dividerEntrega = '<div style="position: relative;"><img style="position:absolute"src="motocicleta.png"><p style="padding-left: 25px;">Entrega</p></div>'
+                let dividerCliente = '<div style="position: relative;"><img style="position:absolute"src="do-utilizador.png"><p style="padding-left: 25px;">Dados do Cliente</p></div>'
+                let dividerPedido = '<div style="position: relative;"><img style="position:absolute"src="police-order.png"><p style="padding-left: 25px;">Detalhes do Pedido</p></div>'
+                let dividerLocalizacao = '<div style="position: relative;"><img style="position:absolute"src="mapas-e-bandeiras.png"><p style="padding-left: 25px;">Observacoes de entrega</p></div>'
+                let data_pedido = campos[9]
+                let detalhes_pedido = detalhes
+                let body_pedidos =  `<p>Data do pedido: ${data_pedido}</p>${dividerPedido} <strong>> ${detalhes}</strong>` 
+                // Dados clientes:
+                let nome_cliente = campos[4]
+                let telefone = campos[5]
+                let body_clientes = `${dividerCliente}<p>Nome do cliente: ${nome_cliente}</p><p>Telefone: ${telefone}</p>`
+                
+                let body = `${body_clientes}${body_pedidos}`
+                
+                let data_entrega = campos[14]
+                let loja_entrega = getLoja(campos[15])
+                let observacoes_entrega = campos[16] ? campos[16].replace(/\n/g, ' ') : ""
+                let entrega = `${dividerEntrega}<p>Data de entrega: ${data_entrega}</p>Loja de entrega: ${loja_entrega}${dividerLocalizacao} <p>${observacoes_entrega}</p>\n`
                 // Monta o formato desejado com os campos
-                outputHtml += `\n\nCarimbo de data/hora: ${campos[2]}\nNome do cliente: ${campos[4]}\n<strong>Loja do Pedido: ${campos[6]}</strong>\nVendedor (a): ${campos[7]}\nData do pedido: ${campos[9]}\nDetalhes do Pedido e Observações:\n<strong>*${detalhes}</strong>\n<strong>Data de entrega: ${campos[14]}</strong>\n<strong>Loja de entrega: ${campos[15]}</strong>\n<strong>Observacoes de entrega: ${campos[16] ? campos[16].replace(/\n/g, ' ') : ""}</strong>\n\n`; // Adiciona um espaço extra para o próximo pedido
+
+                //outputHtml += `\n\nCarimbo de data/hora: ${campos[2]}\nNome do cliente: ${campos[4]}\n<strong>Loja do Pedido: ${campos[6]}</strong>\nVendedor (a): ${campos[7]}\nData do pedido: ${campos[9]}\nDetalhes do Pedido e Observações:\n<strong>*${detalhes}</strong>\n<strong>Data de entrega: ${campos[14]}</strong>\n<strong>Loja de entrega: ${campos[15]}</strong>\n<strong>Observacoes de entrega: ${campos[16] ? campos[16].replace(/\n/g, ' ') : ""}</strong>\n\n`; // Adiciona um espaço extra para o próximo pedido
+                outputHtml += `${header}${body}${entrega}`; // Adiciona um espaço extra para o próximo pedido
+                pedido_id += 1
             }
             document.getElementById("output").innerHTML = "<pre>" + outputHtml + "</pre>";
+        }
+
+        function getLoja(loja_pedido){
+            const lojas = {
+                05: "Rio Mar",
+                04: "Joquei",
+                02: "Iguatemi",
+                01: "Center Um",
+                06: "Delivery"
+            }
+            // get 2 firsts digits of loja_pedido and convert to int
+            let loja = parseInt(loja_pedido.substring(0,2))
+            return lojas[loja]
         }
     </script>
     <script>
