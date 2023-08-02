@@ -147,7 +147,7 @@
                 let carimbo_data_hora = campos[2]
                 let vendedor = campos[7]
                 let headers_pedido = {
-                    true: `<div style="color: black; width: 400px;"><strong><p style="text-align:center; font-size: x-large;">Pedido ${pedido_id}</p></strong></div>`,
+                    true: `<div style="color: black; width: 400px;"><strong><p style="text-align:center; font-size: x-large;">Pedido 0${pedido_id}</p></strong></div>`,
                     false: `<div style="color: black; width: 400px;"><strong><p style="text-align:center; font-size: x-large;">Pedido ${pedido_id}</p></strong></div>`  
                 }
                 let header_pedido = headers_pedido[pedido_id < 1001]
