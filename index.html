@@ -141,11 +141,10 @@
                 // apend campos[12] on linksarray
                 
                 // Verifica se o campo "Detalhes do Pedido e Observações" existe e trata-o corretamente
-                let detalhes = campos[10] ? campos[10].replace(/\n/g, '\n > ') : "";
-                // Removendo aspas da string de detalhes
-                
-                detalhes = detalhes.replace(/"/g, '');
-                
+                let arrayDeDetalhes = (campos[10].replace(/"/g,"")).split("\n")
+
+
+                let detalhes = montaDetalhes(arrayDeDetalhes)
                 // Header:
                 let loja_pedido = getLoja(campos[6])
                 let carimbo_data_hora = campos[2]
@@ -158,7 +157,6 @@
                     06: "D"
                 }
                 let loja = parseInt(campos[6].substring(0,2))
-                console.log(loja)
                 let headers_pedido = {
                     true: `<div style="color: black; width: 230px;"><strong><p style="text-align:center; font-size: x-large;">Pedido ${lojas_abrev[loja]} - 0${pedido_id}</p></strong></div>`,
                     false: `<div style="color: black; width: 230px;"><strong><p style="text-align:center; font-size: x-large;">Pedido ${lojas_abrev[loja]} - ${pedido_id}</p></strong></div>`  
@@ -176,7 +174,7 @@
                 let dividerLocalizacao = '<div style="position: relative;margin-bottom:0px"><img style="position:absolute;width: 12px;top: 3px;"src="mapas-e-bandeiras.png"><p style="padding-left: 25px;margim-bottom:0px">Observacoes de entrega</p></div>'
                 let data_pedido = campos[9]
                 let detalhes_pedido = detalhes
-                let body_pedidos =  `<p>Data do pedido: ${data_pedido}</p>${dividerPedido} <strong>> ${detalhes}</strong>` 
+                let body_pedidos =  `<p>Data do pedido: ${data_pedido}</p>${dividerPedido}<strong>${detalhes}</strong>` 
                 // Dados clientes:
                 let nome_cliente = campos[4]
                 let telefone = campos[5]
@@ -198,6 +196,13 @@
             document.getElementById("output").innerHTML = "<pre>" + outputHtml + "</pre>";
         }
 
+        function montaDetalhes(arrayDeDetalhes){
+            let detalhes = ""
+            arrayDeDetalhes.forEach((detalhe, index) => {
+                detalhes += `>${getTextQuebrado(detalhe)}\n`
+            });
+            return detalhes
+        }
         // function startDownload(){
         //     console.log(linksArray)
         //     linksArray.forEach((link, index) => {
@@ -238,11 +243,12 @@
     <script>
         function getTextQuebrado(text){
             // in each 40 caracteres of the text i want to break the line
-            let parts = text.length / 40;
+            let split = 28
+            let parts = text.length / split;
             if (parts > 1){
                 let textQuebrado = ""
                 for (let i = 0; i < parts; i++){
-                    textQuebrado += text.substring(i*40, (i+1)*40) + "\n"
+                    textQuebrado += text.substring(i*split, (i+1)*split) + "\n"
                 }
                 return textQuebrado
             }
