@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerador de Pedidos Formatados</title>
+    <link rel="icon" type="image/x-icon" href="/ico.png">
     <style>
         /* Estilos globais */
         body {
@@ -107,6 +108,7 @@
         <button onclick="gerarFormatado()">Gerar Formatado</button>
         <button onclick="imprimir()">Imprimir</button>
         <button onclick="copyText()">Copiar Pedidos</button>
+        <!-- <button onclick="startDownload()"> Baixar pedidos do drive: </button> -->
         <div class="input-output-container" id="output">
             <!-- O conteúdo gerado será exibido aqui -->
         </div>
@@ -126,6 +128,7 @@
     </div>
 
     <script>
+        var linksArray = []
         function gerarFormatado() {
             const input = document.getElementById("inputPedido").value.trim();
             const pedidos = input.split("Pedido:"); // Separa pedidos por quebras de linha
@@ -135,7 +138,8 @@
             for (const pedido of pedidos) {
                 // Separa os campos do pedido por tabulação
                 const campos = pedido.split("\t");
-
+                // apend campos[12] on linksarray
+                
                 // Verifica se o campo "Detalhes do Pedido e Observações" existe e trata-o corretamente
                 let detalhes = campos[10] ? campos[10].replace(/\n/g, '\n > ') : "";
                 // Removendo aspas da string de detalhes
@@ -162,6 +166,7 @@
                 let header_pedido = headers_pedido[pedido_id < 1001]
                 let header = `${header_pedido}<p>${carimbo_data_hora} - ${loja_pedido}</p><p>Vendedor (a): ${vendedor}</p>`
                 
+                //linksArray.push({campos: campos[12],pedido_id:`${lojas_abrev[loja]} - 0${pedido_id}`})
                 // Body (detalhes do pedido):
                 // Pedidos:
                 // Section de pedidos:
@@ -192,6 +197,30 @@
             }
             document.getElementById("output").innerHTML = "<pre>" + outputHtml + "</pre>";
         }
+
+        // function startDownload(){
+        //     console.log(linksArray)
+        //     linksArray.forEach((link, index) => {
+        //         // i have this string https://drive.google.com/open?id=1wsaT7eZIK_lzWPGAhDJi10aC4TLxcaxl
+        //         // i want to get the id :
+        //         if(link.campos.length > 5){
+        //             let id = link.campos.substring(link.campos.indexOf("id=") + 3, link.campos.length)
+        //             let link_download = `https://drive.google.com/uc?export=download&id=${id}`
+        //             downloadLink(link_download,link.pedido_id)
+        //         }
+        //     });
+        // }
+        // function downloadLink(link, index) {
+        //     const pedido_id = index;
+        //     const filename = `/pedido_${pedido_id}_downloaded_content`; // Change the filename here
+        //     const anchor = document.createElement('a');
+        //     anchor.href = link;
+        //     anchor.download = filename;
+        //     anchor.click();
+
+        //     // You can also add a delay before downloading the actual file if needed.
+        //     //window.open(link, '_blank');
+        // }
 
         function getLoja(loja_pedido){
             const lojas = {
