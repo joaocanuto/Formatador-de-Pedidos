@@ -141,7 +141,7 @@
                 // apend campos[12] on linksarray
                 
                 // Verifica se o campo "Detalhes do Pedido e Observações" existe e trata-o corretamente
-                let arrayDeDetalhes = (campos[10].replace(/"/g,"")).split("\n")
+                let arrayDeDetalhes = (campos[10].replace(/"/g, "")).split("\n")
 
 
                 let detalhes = montaDetalhes(arrayDeDetalhes)
@@ -150,20 +150,21 @@
                 let carimbo_data_hora = campos[2]
                 let vendedor = campos[7]
                 let lojas_abrev = {
-                    05: "R",
-                    04: "J",
-                    02: "I",
-                    01: "C",
-                    06: "D"
+                    01: "C", // Center Um
+                    02: "I", // Iguatemi
+                    03: "J", // Joquei
+                    04: "R", // Rio Mar
+                    05: "P", // Del Paseo
+                    06: "D"  // Delivery
                 }
-                let loja = parseInt(campos[6].substring(0,2))
+                let loja = parseInt(campos[6].substring(0, 2))
                 let headers_pedido = {
                     true: `<div style="color: black; width: 230px;"><strong><p style="text-align:center; font-size: x-large;">Pedido ${lojas_abrev[loja]} - 0${pedido_id}</p></strong></div>`,
-                    false: `<div style="color: black; width: 230px;"><strong><p style="text-align:center; font-size: x-large;">Pedido ${lojas_abrev[loja]} - ${pedido_id}</p></strong></div>`  
+                    false: `<div style="color: black; width: 230px;"><strong><p style="text-align:center; font-size: x-large;">Pedido ${lojas_abrev[loja]} - ${pedido_id}</p></strong></div>`
                 }
                 let header_pedido = headers_pedido[pedido_id < 1001]
                 let header = `${header_pedido}<p>${carimbo_data_hora} - ${loja_pedido}</p><p>Vendedor (a): ${vendedor}</p>`
-                
+
                 //linksArray.push({campos: campos[12],pedido_id:`${lojas_abrev[loja]} - 0${pedido_id}`})
                 // Body (detalhes do pedido):
                 // Pedidos:
@@ -174,19 +175,19 @@
                 let dividerLocalizacao = '<div style="position: relative;margin-bottom:0px"><img style="position:absolute;width: 12px;top: 3px;"src="mapas-e-bandeiras.png"><p style="padding-left: 25px;margim-bottom:0px">Observacoes de entrega</p></div>'
                 let data_pedido = campos[9]
                 let detalhes_pedido = detalhes
-                let body_pedidos =  `<p>Data do pedido: ${data_pedido}</p>${dividerPedido}<strong>${detalhes}</strong>` 
+                let body_pedidos = `<p>Data do pedido: ${data_pedido}</p>${dividerPedido}<strong>${detalhes}</strong>`
                 // Dados clientes:
                 let nome_cliente = campos[4]
                 let telefone = campos[5]
                 let body_clientes = `${dividerCliente}<p>Nome do cliente: ${nome_cliente}</p><p>Telefone: ${telefone}</p>`
-                
+
                 let body = `${body_clientes}${body_pedidos}`
-                
+
                 let data_entrega = campos[14]
                 let loja_entrega = getLoja(campos[15])
                 let observacoes_entrega = campos[16] ? campos[16].replace(/\n/g, ' ') : ""
                 observacoes_entrega = getTextQuebrado(observacoes_entrega)
-                let entrega = `${dividerEntrega}<p>Data de entrega: ${data_entrega}</p>Loja de entrega:${loja_entrega}${dividerLocalizacao} <p style="margin-top:0;">${observacoes_entrega}</p>\n`
+                let entrega = `${dividerEntrega}<p>Data de entrega: ${data_entrega}</p>Loja de entrega: ${loja_entrega}${dividerLocalizacao} <p style="margin-top:0;">${observacoes_entrega}</p>\n`
                 // Monta o formato desejado com os campos
 
                 //outputHtml += `\n\nCarimbo de data/hora: ${campos[2]}\nNome do cliente: ${campos[4]}\n<strong>Loja do Pedido: ${campos[6]}</strong>\nVendedor (a): ${campos[7]}\nData do pedido: ${campos[9]}\nDetalhes do Pedido e Observações:\n<strong>*${detalhes}</strong>\n<strong>Data de entrega: ${campos[14]}</strong>\n<strong>Loja de entrega: ${campos[15]}</strong>\n<strong>Observacoes de entrega: ${campos[16] ? campos[16].replace(/\n/g, ' ') : ""}</strong>\n\n`; // Adiciona um espaço extra para o próximo pedido
@@ -196,7 +197,7 @@
             document.getElementById("output").innerHTML = "<pre>" + outputHtml + "</pre>";
         }
 
-        function montaDetalhes(arrayDeDetalhes){
+        function montaDetalhes(arrayDeDetalhes) {
             let detalhes = ""
             arrayDeDetalhes.forEach((detalhe, index) => {
                 detalhes += `>${getTextQuebrado(detalhe)}\n`
@@ -227,33 +228,35 @@
         //     //window.open(link, '_blank');
         // }
 
-        function getLoja(loja_pedido){
+        function getLoja(loja_pedido) {
             const lojas = {
-                05: "Rio Mar",
-                04: "Joquei",
-                02: "Iguatemi",
                 01: "Center Um",
+                02: "Iguatemi",
+                03: "Joquei",
+                04: "Rio Mar",
+                05: "Del Paseo",
                 06: "Delivery"
             }
             // get 2 firsts digits of loja_pedido and convert to int
-            let loja = parseInt(loja_pedido.substring(0,2))
+            let loja = parseInt(loja_pedido.substring(0, 2))
             return lojas[loja]
         }
     </script>
     <script>
-        function getTextQuebrado(text){
+        function getTextQuebrado(text) {
             // in each 40 caracteres of the text i want to break the line
             let split = 28
-            let parts = text.length / split;
-            if (parts > 1){
+            let parts = Math.ceil(text.length / split);
+            if (parts > 1) {
                 let textQuebrado = ""
-                for (let i = 0; i < parts; i++){
-                    textQuebrado += text.substring(i*split, (i+1)*split) + "\n"
+                for (let i = 0; i < parts; i++) {
+                    textQuebrado += text.substring(i * split, (i + 1) * split) + "\n"
                 }
                 return textQuebrado
             }
             return text
         }
+
         function imprimir() {
             var prtContent = document.getElementById("output");
             var WinPrint = window.open('', '', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0');
@@ -262,6 +265,7 @@
             WinPrint.focus();
             WinPrint.print();
         }
+
         function copyText() {
             navigator.clipboard.writeText
                 (document.getElementById("output").innerText);
