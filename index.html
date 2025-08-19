@@ -150,12 +150,14 @@
                 let carimbo_data_hora = campos[2]
                 let vendedor = campos[7]
                 let lojas_abrev = {
-                    01: "C", // Center Um
-                    02: "I", // Iguatemi
-                    03: "J", // Joquei
-                    04: "R", // Rio Mar
-                    05: "P", // Del Paseo
-                    06: "D"  // Delivery
+                    1: "C", // Center Um
+                    2: "I", // Iguatemi
+                    3: "J", // Joquei
+                    4: "R", // Rio Mar
+                    5: "P", // Del Paseo
+                    6: "M", // Maracanau
+                    7: "V", // Via Sul
+                    8: "D"  // Delivery (sempre o último número)
                 }
                 let loja = parseInt(campos[6].substring(0, 2))
                 let headers_pedido = {
@@ -230,12 +232,14 @@
 
         function getLoja(loja_pedido) {
             const lojas = {
-                01: "Center Um",
-                02: "Iguatemi",
-                03: "Joquei",
-                04: "Rio Mar",
-                05: "Del Paseo",
-                06: "Delivery"
+                1: "Center Um",
+                2: "Iguatemi",
+                3: "Joquei",
+                4: "Rio Mar",
+                5: "Del Paseo",
+                6: "Maracanau",
+                7: "Via Sul",
+                8: "Delivery" // sempre o último número
             }
             // get 2 firsts digits of loja_pedido and convert to int
             let loja = parseInt(loja_pedido.substring(0, 2))
